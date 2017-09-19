@@ -115,9 +115,10 @@ input:
 the activated page is displayed.
 
 ### INT 10h / AH = 06h 
-scroll up window.
+Scroll up window.
+
 ### INT 10h / AH = 07h 
-scroll down window.
+Scroll down window.
 
 input:
 * AL = number of lines by which to scroll (00h = clear entire window).
@@ -382,7 +383,7 @@ return:
 * AH = BIOS scan code.
 * AL = ASCII character.
 
-(if a keystroke is present, it is removed from the keyboard buffer).
+(If a keystroke is present, it is removed from the keyboard buffer).
 
 ### INT 16h / AH = 01h 
 Check for keystroke in the keyboard buffer.
@@ -436,7 +437,7 @@ For DOS interrupts (INT 21h) drive A: is emulated in this subdirectory:
 C:\emu8086\vdrive\a\
 
 Note: DOS file system limits the file and directory names to 8 characters,
-extension is limited to 3 characters;
+extension is limited to 3 characters
 example of a valid file name: myfile.txt (file name = 6 chars, extension - 3
 chars). extension is written after the dot, no other dots are allowed.
 
@@ -555,7 +556,7 @@ The function does not allow to enter more characters than the specified
 buffer size.
 
 ### INT 21h / AH=0Bh 
-Get input status;
+Get input status
 
 returns: AL = 00h if no character available, AL = 0FFh if character is
 available.
@@ -583,26 +584,27 @@ Get current default drive.
 Return: AL = drive (0=A:, 1=B:, etc)
 
 ### INT 21h / AH=25h 
-Set interrupt vector;
+Set interrupt vector
 
 input: AL = interrupt number. DS:DX -> new interrupt handler.
 
 ### INT 21h / AH=2Ah 
-Get system date;
+Get system date
 
 return: CX = year (1980-2099). DH = month. DL = day. AL = day of week
 (00h=Sunday)
 
 ### INT 21h / AH=2Ch 
-Get system time;
+Get system time
 
 return: CH = hour. CL = minute. DH = second. DL = 1/100 seconds.
 
 
 ### INT 21h / AH=35h 
-Get interrupt vector;
+Get interrupt vector
 
-entry: AL = interrupt number;
+entry: AL = interrupt number
+
 return: ES:BX -> current interrupt handler.
 
 ### INT 21h / AH= 39h 
