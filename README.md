@@ -2,7 +2,6 @@
 
 ## Quick reference:
 
-a  |  b  | c   | d   | e | f | g | h  
 ---   | ---  | ---  | ---  | ---    | ---   | ---  | ---
 AAA   | DAA  | HLT  | JNL  | LODSB  | POP   | ROR  | XCHG
 AAD   | DAS  | IMUL | JNLE | LODSW  | POPA  | SAHF | XLATB
@@ -24,8 +23,11 @@ CWD   | JNBE | JNGE | LES  | OUT    | ROL   | TEST
 
 ## Operand types:
 *REG*: AX, BX, CX, DX, AH, AL, BL, BH, CH, CL, DH, DL, DI, SI, BP, SP.
+
 *SREG*: DS, ES, SS, and only as second operand: CS.
+
 *memory*: [BX], [BX+SI+7], variable, etc...(see Memory Access).
+
 *immediate*: 5, -24, 3Fh, 10001101b, etc...
 
 ## Notes:
@@ -118,8 +120,10 @@ AAA ; AH = 01, AL = 05
 RET
 ```
 
+```
 C Z S O P A
 r ? ? ? ? r
+```
 
 ### AAD 
 No operands
@@ -139,8 +143,10 @@ AAD ; AH = 00, AL = 0Fh (15)
 RET
 ```
 
+```
 C Z S O P A
 ? r r ? r ?
+```
 
 
 ### AAM 
@@ -162,8 +168,10 @@ AAM ; AH = 01, AL = 05
 RET
 ```
 
+```
 C Z S O P A
 ? r r ? r ?
+```
 
 ### AAS
 No operands
@@ -192,8 +200,10 @@ AAS ; AH = 01, AL = 09
 RET
 ```
 
+```
 C Z S O P A
 r ? ? ? ? r
+```
 
 ### ADC
 * REG, memory
@@ -216,8 +226,10 @@ ADC AL, 1 ; AL = 7
 RET
 ```
 
+```
 C Z S O P A
 r r r r r r
+```
 
 ### ADD
 * REG, memory
@@ -239,8 +251,10 @@ ADD AL, -3 ; AL = 2
 RET
 ```
 
+```
 C Z S O P A
 r r r r r r
+```
 
 ### AND
 * REG, memory
@@ -265,8 +279,10 @@ AND AL, 11011111b ; AL = 01000001b ('A')
 RET
 ```
 
+```
 C Z S O P
 0 r r 0 r
+```
 
 ### CALL
 * procedure name
@@ -291,8 +307,10 @@ p1 PROC ; procedure declaration.
 p1 ENDP
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### CBW 
 No operands
@@ -314,8 +332,10 @@ CBW ; AX = 0FFFBh (-5)
 RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### CLC 
 No operands
@@ -326,8 +346,10 @@ Algorithm:
 
 CF = 0
 
+```
 C
 0
+```
 
 ### CLD 
 No operands
@@ -340,8 +362,10 @@ Algorithm:
 
 DF = 0
 
+```
 D
 0
+```
 
 ### CLI 
 No operands
@@ -366,8 +390,10 @@ Algorithm:
 if CF = 1 then CF = 0
 if CF = 0 then CF = 1
 
+```
 C
 r
+```
 
 ### CMP
 * REG, memory
@@ -393,8 +419,10 @@ CMP AL, BL ; AL = 5, ZF = 1 (so equal!)
 RET
 ```
 
+```
 C Z S O P A
 r r r r r r
+```
 
 ### CMPSB 
 No operands
@@ -407,14 +435,16 @@ Algorithm:
 * set flags according to result:
 OF, SF, ZF, AF, PF, CF
 * if DF = 0 then
-** SI = SI + 1
-** DI = DI + 1
+  * SI = SI + 1
+  * DI = DI + 1
 else
-** SI = SI - 1
-** DI = DI - 1
+  * SI = SI - 1
+  * DI = DI - 1
 
+```
 C Z S O P A
 r r r r r r
+```
 
 ### CMPSW 
 No operands
@@ -427,14 +457,16 @@ Algorithm:
 * set flags according to result:
 OF, SF, ZF, AF, PF, CF
 * if DF = 0 then
-** SI = SI + 2
-** DI = DI + 2
+  * SI = SI + 2
+  * DI = DI + 2
 else
-** SI = SI - 2
-** DI = DI - 2
+  * SI = SI - 2
+  * DI = DI - 2
 
+```
 C Z S O P A
 r r r r r r
+```
 
 ### CWD 
 No operands
@@ -457,8 +489,10 @@ CWD ; DX AX = 0FFFFh:0FFFBh
 RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 
 ### DAA 
@@ -484,8 +518,10 @@ DAA ; AL = 15h
 RET
 ```
 
+```
 C Z S O P A
 r r r r r r
+```
 
 ### DAS 
 No operands
@@ -510,8 +546,10 @@ DAS ; AL = 99h, CF = 1
 RET
 ```
 
+```
 C Z S O P A
 r r r r r r
+```
 
 ### DEC
 * REG
@@ -556,8 +594,10 @@ DIV BL ; AL = 50 (32h), AH = 3
 RET
 ```
 
+```
 C Z S O P A
 ? ? ? ? ? ?
+```
 
 ### HLT 
 No operands
@@ -570,8 +610,10 @@ MOV AX, 5
 HLT
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### IDIV
 * REG
@@ -596,8 +638,10 @@ IDIV BL ; AL = -50 (0CEh), AH = -3 (0FDh)
 RET
 ```
 
+```
 C Z S O P A
 ? ? ? ? ? ?
+```
 
 ### IMUL 
 * REG
@@ -621,8 +665,10 @@ RET
 ```
 CF=OF=0 when result fits into operand of IMUL.
 
+```
 C Z S O P A
 r ? ? r ? ?
+```
 
 ### IN
 AL, im.byte
@@ -641,8 +687,10 @@ IN AX, 4 ; get status of traffic lights.
 IN AL, 7 ; get status of stepper-motor.
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### INC
 * REG
@@ -672,9 +720,9 @@ Interrupt numbered by immediate byte (0..255).
 Algorithm:
 
 Push to stack:
-** flags register
-** CS
-** IP
+  * flags register
+  * CS
+  * IP
 * IF = 0
 * Transfer control to interrupt procedure
 
@@ -685,8 +733,10 @@ MOV AL, 'A'
 RET
 ```
 
+```
 C Z S O P A I
 unchanged 0
+```
 
 ### INTO 
 No operands
@@ -715,12 +765,14 @@ Interrupt Return.
 Algorithm:
 
 Pop from stack:
-** IP
-** CS
-** flags register
+* IP
+* CS
+  * flags register
 
+```
 C Z S O P A
 popped
+```
 
 ### JA label
 
@@ -746,8 +798,10 @@ exit:
  RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### JAE label
 Short Jump if first operand is Above or Equal to second operand
@@ -773,8 +827,10 @@ label1:
   RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### JB label
 Short Jump if first operand is Below second operand 
@@ -800,8 +856,10 @@ exit:
   RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### JBE label
 Short Jump if first operand is Below or Equal to second operand 
@@ -827,8 +885,10 @@ exit:
   RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### JC label
 Short Jump if Carry flag is set to 1.
@@ -852,8 +912,10 @@ exit:
   RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### JCXZ label
 Short Jump if CX register is 0.
@@ -876,8 +938,10 @@ exit:
   RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### JE label
 Short Jump if first operand is Equal to second operand 
@@ -903,8 +967,10 @@ exit:
   RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### JG label
 Short Jump if first operand is Greater then second
@@ -929,8 +995,10 @@ exit:
  RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### JGE label
 
@@ -957,8 +1025,10 @@ exit:
   RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### JL label
 Short Jump if first operand is Less then second
@@ -983,8 +1053,10 @@ exit:
   RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### JLE label
 
@@ -1011,8 +1083,10 @@ label1:
   RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### JMP label
 4-byte address
@@ -1038,8 +1112,10 @@ label1:
   RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### JNA label
 Short Jump if first operand is Not Above second
@@ -1064,8 +1140,10 @@ exit:
   RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### JNAE label
 Short Jump if first operand is Not Above and Not
@@ -1091,8 +1169,10 @@ exit:
   RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### JNB label
 Short Jump if first operand is Not Below second operand 
@@ -1118,8 +1198,10 @@ exit:
   RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### JNBE label
 Short Jump if first operand is Not Below and Not Equal to second operand 
@@ -1145,8 +1227,10 @@ exit:
   RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### JNC label
 Short Jump if Carry flag is set to 0.
@@ -1170,8 +1254,10 @@ exit:
  RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### JNE label
 Short Jump if first operand is Not Equal to second operand 
@@ -1197,8 +1283,10 @@ exit:
   RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### JNG label
 Short Jump if first operand is Not Greater then second operand 
@@ -1224,8 +1312,10 @@ exit:
   RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### JNGE label
 Short Jump if first operand is Not Greater and Not Equal to second operand 
@@ -1251,8 +1341,10 @@ exit:
   RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### JNL label
 Short Jump if first operand is Not Less then second operand 
@@ -1277,8 +1369,10 @@ label1:
 exit:
  RET
 ```
+```
 C Z S O P A
 unchanged
+```
 
 ### JNLE label
 Short Jump if first operand is Not Less and Not
@@ -1304,8 +1398,10 @@ exit:
 RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### JNO label
 Short Jump if Not Overflow.
@@ -1331,8 +1427,10 @@ PRINT 'no overflow.'
 exit:
  RET
 ```
+```
 C Z S O P A
 unchanged
+```
 
 ### JNP label
 Short Jump if No Parity (odd). 
@@ -1360,8 +1458,10 @@ exit:
 RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### JNS label
 Short Jump if Not Signed (if positive). 
@@ -1386,8 +1486,10 @@ PRINT 'not signed.'
 exit:
  RET
 ```
+```
  C Z S O P A
  unchanged
+```
 
 
 ### JNZ label
@@ -1414,8 +1516,10 @@ exit:
 RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### JO label
 Short Jump if Overflow.
@@ -1442,8 +1546,10 @@ exit:
  RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### JP label
 Short Jump if Parity (even). Only 8 low bits of result are checked. 
@@ -1469,8 +1575,10 @@ exit:
 RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### JPE label
 Short Jump if Parity Even. Only 8 low bits of result are checked. 
@@ -1496,8 +1604,10 @@ exit:
 RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### JPO label
 Short Jump if Parity Odd. Only 8 low bits of result are checked. 
@@ -1523,8 +1633,10 @@ exit:
   RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### JS label
 Short Jump if Signed (if negative). 
@@ -1550,8 +1662,10 @@ exit:
  RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### JZ label
 Short Jump if Zero (equal). 
@@ -1577,8 +1691,10 @@ exit:
 RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### LAHF 
 No operands
@@ -1592,8 +1708,10 @@ AH bit: 7 6 5 4 3 2 1 0
 `[SF] [ZF] [0] [AF] [0] [PF] [1] [CF]`
 bits 1, 3, 5 are reserved.
 
+```
 C Z S O P A
 unchanged
+```
 
 ### LDS 
 * REG, memory
@@ -1616,8 +1734,10 @@ END
 ```
 AX is set to 1234h, DS is set to 5678h.
 
+```
 C Z S O P A
 unchanged
+```
 
 ### LEA 
 * REG, memory
@@ -1646,8 +1766,10 @@ m dw 1234h
 END
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### LES 
 * REG, memory
@@ -1670,8 +1792,10 @@ END
 ```
 AX is set to 1234h, ES is set to 5678h.
 
+```
 C Z S O P A
 unchanged
+```
 
 ### LODSB 
 No operands
@@ -1682,9 +1806,9 @@ Algorithm:
 
 * AL = DS:[SI]
 * if DF = 0 then
-** SI = SI + 1
+  * SI = SI + 1
 else
-** SI = SI - 1
+  * SI = SI - 1
 
 Example:
 ```nasm
@@ -1699,8 +1823,10 @@ Example:
 
  a1 DB 'H', 'e', 'l', 'l', 'o'
 ```
+```
 C Z S O P A
 unchanged
+```
 
 ### LODSW 
 No operands
@@ -1711,9 +1837,9 @@ Algorithm:
 
 * AX = DS:[SI]
 * if DF = 0 then
-** SI = SI + 2
+  * SI = SI + 2
 else
-** SI = SI - 2
+  * SI = SI - 2
 
 Example:
 ```nasm
@@ -1725,8 +1851,10 @@ RET
 a1 dw 111h, 222h, 333h, 444h, 555h
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### LOOP label
 Decrease CX, jump to label if CX not zero.
@@ -1735,9 +1863,9 @@ Algorithm:
 
 * CX = CX - 1
 * if CX <> 0 then
-** jump
+  * jump
 else
-** no jump, continue
+  * no jump, continue
 
 Example:
 ```nasm
@@ -1750,8 +1878,10 @@ label1:
 RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 
 ### LOOPE label
@@ -1761,9 +1891,9 @@ Algorithm:
 
 * CX = CX - 1
 * if (CX <> 0) and (ZF = 1) then
-** jump
+  * jump
 else
-** no jump, continue
+  * no jump, continue
 
 Example:
 ```nasm
@@ -1783,8 +1913,10 @@ LOOPE label1
 RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### LOOPNE label
 Decrease CX, jump to label if CX not zero and Not Equal (ZF = 0).
@@ -1793,9 +1925,9 @@ Algorithm:
 
 * CX = CX - 1
 * if (CX <> 0) and (ZF = 0) then
-** jump
+  * jump
 else
-** no jump, continue
+  * no jump, continue
 
 Example:
 ```nasm
@@ -1815,8 +1947,10 @@ RET
 v1 db 9, 8, 7, 6, 5
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### LOOPNZ label
 Decrease CX, jump to label if CX not zero and ZF = 0.
@@ -1825,9 +1959,9 @@ Algorithm:
 
 * CX = CX - 1
 * if (CX <> 0) and (ZF = 0) then
-** jump
+  * jump
 else
-** no jump, continue
+  * no jump, continue
 
 Example:
 ```nasm
@@ -1847,8 +1981,10 @@ RET
 v1 db 9, 8, 7, 6, 5
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### LOOPZ label
 Decrease CX, jump to label if CX not zero and ZF = 1.
@@ -1857,9 +1993,9 @@ Algorithm:
 
 * CX = CX - 1
 * if (CX <> 0) and (ZF = 1) then
-** jump
+  * jump
 else
-** no jump, continue
+  * no jump, continue
 
 Example:
 ```nasm
@@ -1879,8 +2015,10 @@ LOOPZ label1
 RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### MOV
 * REG, memory
@@ -1916,8 +2054,10 @@ MOV [BX], CX ; w.[0B800h:015Eh] = CX.
 RET ; returns to operating system.
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### MOVSB 
 No operands
@@ -1929,11 +2069,11 @@ Algorithm:
 
 * ES:[DI] = DS:[SI]
 * if DF = 0 then
-** SI = SI + 1
-** DI = DI + 1
+  * SI = SI + 1
+  * DI = DI + 1
 else
-** SI = SI - 1
-** DI = DI - 1
+  * SI = SI - 1
+  * DI = DI - 1
 
 Example:
 ```nasm
@@ -1948,8 +2088,10 @@ a1 DB 1,2,3,4,5
 a2 DB 5 DUP(0)
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### MOVSW 
 No operands
@@ -1960,11 +2102,11 @@ Algorithm:
 
 * ES:[DI] = DS:[SI]
 * if DF = 0 then
-** SI = SI + 2
-** DI = DI + 2
+  * SI = SI + 2
+  * DI = DI + 2
 else
-** SI = SI - 2
-** DI = DI - 2
+  * SI = SI - 2
+  * DI = DI - 2
 
 Example:
 ```nasm
@@ -1981,8 +2123,10 @@ a1 DW 1,2,3,4,5
 a2 DW 5 DUP(0)
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 # MUL 
 REG
@@ -2006,8 +2150,10 @@ RET
 ```
 CF=OF=0 when high section of the result is zero.
 
+```
 C Z S O P A
 r ? ? r ? ?
+```
 
 ### NEG 
 * REG
@@ -2028,8 +2174,10 @@ NEG AL ; AL = 05h (5)
 RET
 ```
 
+```
 C Z S O P A
 r r r r r r
+```
 
 ### NOP 
 No operands
@@ -2049,8 +2197,10 @@ NOP
 RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### NOT 
 * REG
@@ -2070,8 +2220,10 @@ NOT AL ; AL = 11100100b
 RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### OR
 * REG, memory
@@ -2095,8 +2247,10 @@ OR AL, 00100000b ; AL = 01100001b ('a')
 RET
 ```
 
+```
 C Z S O P A
 0 r r 0 r ?
+```
 
 ### OUT
 * im.byte, AL
@@ -2120,8 +2274,10 @@ MOV AL, 100b ; Turn on the third
 OUT 7, AL ; magnet of the stepper-motor.
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### POP
 * REG
@@ -2142,8 +2298,10 @@ POP DX ; DX = 1234h
 RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### POPA 
 No operands
@@ -2166,8 +2324,10 @@ Algorithm:
 * POP CX
 * POP AX
 
+```
 C Z S O P A
 unchanged
+```
 
 ### POPF 
 No operands
@@ -2179,8 +2339,10 @@ Algorithm:
 * flags = SS:[SP] (top of the stack)
 * SP = SP + 2
 
+```
 C Z S O P A
 popped
+```
 
 ### PUSH
 * REG
@@ -2204,8 +2366,10 @@ POP DX ; DX = 1234h
 RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### PUSHA 
 No operands
@@ -2228,8 +2392,10 @@ Algorithm:
 * PUSH SI
 * PUSH DI
 
+```
 C Z S O P A
 unchanged
+```
 
 ### PUSHF 
 No operands
@@ -2241,8 +2407,10 @@ Algorithm:
 * SP = SP - 2
 * SS:[SP] (top of the stack) = flags
 
+```
 C Z S O P A
 unchanged
+```
 
 ### RCL
 * memory, immediate
@@ -2272,8 +2440,10 @@ RET
 ```
 OF=0 if first operand keeps original sign.
 
+```
 C O
 r r
+```
 
 ### RCR
 * memory, immediate
@@ -2300,8 +2470,10 @@ RET
 ```
 OF=0 if first operand keeps original sign.
 
+```
 C O
 r r
+```
 
 ### REP chain instruction
 
@@ -2317,8 +2489,10 @@ if CX <> 0 then
 else
 * exit from REP cycle
 
+```
 Z
 r
+```
 
 ### REPE chain instruction
 Repeat following CMPSB, CMPSW, SCASB, SCASW instructions 
@@ -2331,14 +2505,16 @@ if CX <> 0 then
 * do following chain instruction
 * CX = CX - 1
 * if ZF = 1 then:
-** go back to check_cx
+  * go back to check_cx
 else
-** exit from REPE cycle
+  * exit from REPE cycle
 else
 * exit from REPE cycle
 
+```
 Z
 r
+```
 
 
 ### REPNE chain instruction
@@ -2352,14 +2528,16 @@ if CX <> 0 then
 * do following chain instruction
 * CX = CX - 1
 * if ZF = 0 then:
-** go back to check_cx
+  * go back to check_cx
 else
-** exit from REPNE cycle
+  * exit from REPNE cycle
 else
 * exit from REPNE cycle
 
+```
 Z
 r
+```
 
 ### REPNZ chain instruction
 Repeat following CMPSB, CMPSW, SCASB, SCASW instructions while ZF = 0 
@@ -2372,14 +2550,16 @@ if CX <> 0 then
 * do following chain instruction
 * CX = CX - 1
 * if ZF = 0 then:
-** go back to check_cx
+  * go back to check_cx
 else
-** exit from REPNZ cycle
+  * exit from REPNZ cycle
 else
 * exit from REPNZ cycle
 
+```
 Z
 r
+```
 
 ### REPZ chain instruction
 Repeat following CMPSB, CMPSW, SCASB, SCASW instructions while ZF = 1 
@@ -2392,14 +2572,16 @@ if CX <> 0 then
 * do following chain instruction
 * CX = CX - 1
 * if ZF = 1 then:
-** go back to check_cx
+  * go back to check_cx
 else
-** exit from REPZ cycle
+  * exit from REPZ cycle
 else
 * exit from REPZ cycle
 
+```
 Z
 r
+```
 
 ### RET 
 * No operands
@@ -2410,7 +2592,7 @@ Return from near procedure.
 Algorithm:
 
 * Pop from stack:
-** IP
+  * IP
 * if immediate operand is present:
 SP = SP + operand
 
@@ -2429,8 +2611,10 @@ p1 PROC           ; procedure declaration.
 p1 ENDP
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### RETF 
 * No operands
@@ -2441,13 +2625,15 @@ Return from Far procedure.
 Algorithm:
 
 * Pop from stack:
-** IP
-** CS
+  * IP
+  * CS
 * if immediate operand is present:
 SP = SP + operand
 
+```
 C Z S O P A
 unchanged
+```
 
 ### ROL
 * memory, immediate
@@ -2470,8 +2656,10 @@ RET
 ```
 OF=0 if first operand keeps original sign.
 
+```
 C O
 r r
+```
 
 ### ROR
 * memory, immediate
@@ -2495,8 +2683,10 @@ RET
 ```
 OF=0 if first operand keeps original sign.
 
+```
 C O
 r r
+```
 
 ### SAHF 
 No operands
@@ -2510,8 +2700,10 @@ AH bit: 7 6 5 4 3 2 1 0
 [SF] [ZF] [0] [AF] [0] [PF] [1] [CF]
 bits 1, 3, 5 are reserved.
 
+```
 C Z S O P A
 r r r r r r
+```
 
 ### SAL
 * memory, immediate
@@ -2536,8 +2728,10 @@ RET
 ```
 OF=0 if first operand keeps original sign.
 
+```
 C O
 r r
+```
 
 ### SAR
 * memory, immediate
@@ -2562,8 +2756,10 @@ RET
 ```
 OF=0 if first operand keeps original sign.
 
+```
 C O
 r r
+```
 
 ### SBB
 * REG, memory
@@ -2586,8 +2782,10 @@ SBB AL, 3 ; AL = 5 - 3 - 1 = 1
 RET
 ```
 
+```
 C Z S O P A
 r r r r r r
+```
 
 ### SCASB 
 No operands
@@ -2600,12 +2798,14 @@ Algorithm:
 * set flags according to result:
 OF, SF, ZF, AF, PF, CF
 * if DF = 0 then
-** DI = DI + 1
+  * DI = DI + 1
 else
-** DI = DI - 1
+  * DI = DI - 1
 
+  ```
 C Z S O P A
 r r r r r r
+```
 
 ### SCASW 
 No operands
@@ -2618,12 +2818,14 @@ Algorithm:
 * set flags according to result:
 OF, SF, ZF, AF, PF, CF
 * if DF = 0 then
-** DI = DI + 2
+  * DI = DI + 2
 else
-** DI = DI - 2
+  * DI = DI - 2
 
+  ```
 C Z S O P A
 r r r r r r
+```
 
 ### SHL
 * memory, immediate
@@ -2646,8 +2848,10 @@ RET
 ```
 OF=0 if first operand keeps original sign.
 
+```
 C O
 r r
+```
 
 ### SHR
 * memory, immediate
@@ -2670,8 +2874,10 @@ RET
 ```
 OF=0 if first operand keeps original sign.
 
+```
 C O
 r r
+```
 
 ### STC 
 No operands
@@ -2682,8 +2888,10 @@ Algorithm:
 
 CF = 1
 
+```
 C
 1
+```
 
 ### STD 
 No operands
@@ -2696,8 +2904,10 @@ Algorithm:
 
 DF = 1
 
+```
 D
 1
+```
 
 ### STI 
 No operands
@@ -2720,9 +2930,9 @@ Algorithm:
 
 * ES:[DI] = AL
 * if DF = 0 then
-** DI = DI + 1
+  * DI = DI + 1
 else
-** DI = DI - 1
+  * DI = DI - 1
 
 Example:
 ```nasm
@@ -2735,8 +2945,10 @@ RET
 a1 DB 5 dup(0)
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### STOSW 
 No operands
@@ -2747,9 +2959,9 @@ Algorithm:
 
 * ES:[DI] = AX
 * if DF = 0 then
-** DI = DI + 2
+  * DI = DI + 2
 else
-** DI = DI - 2
+  * DI = DI - 2
 
 Example:
 ```nasm
@@ -2765,8 +2977,10 @@ RET
 a1 DW 5 dup(0)
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### SUB
 * REG, memory
@@ -2788,8 +3002,10 @@ SUB AL, 1 ; AL = 4
 RET
 ```
 
+```
 C Z S O P A
 r r r r r r
+```
 
 ### TEST
 * REG, memory
@@ -2818,8 +3034,10 @@ TEST AL, 10b ; ZF = 1.
 RET
 ```
 
+```
 C Z S O P
 0 r r 0 r
+```
 
 ### XCHG
 * REG, memory
@@ -2841,8 +3059,10 @@ XCHG AL, AH ; AL = 5, AH = 2
 RET
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### XLATB 
 No operands
@@ -2868,8 +3088,10 @@ RET
 dat DB 11h, 22h, 33h, 44h, 55h
 ```
 
+```
 C Z S O P A
 unchanged
+```
 
 ### XOR
 * REG, memory
@@ -2895,8 +3117,10 @@ XOR AL, 00000010b ; AL = 00000101b
 RET
 ```
 
+```
 C Z S O P A
 0 r r 0 r ?
+```
 
 
 ## Notes
