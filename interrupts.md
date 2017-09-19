@@ -28,12 +28,12 @@ INT 10h/1003h |             | INT 21h/2Ch |
 
 
 ### INT 10h / AH = 0 
-set video mode.
+Set video mode.
 
 input:
 * AL = desired video mode.
 
-these video modes are supported:
+These video modes are supported:
 * 00h - text mode. 40x25. 16 colors. 8 pages.
 * 03h - text mode. 80x25. 16 colors. 8 pages.
 * 13h - graphical mode. 40x25. 256 colors. 320x200 pixels. 1 page.
@@ -46,7 +46,7 @@ int 10h
 ``` 
 
 ### INT 10h / AH = 01h 
-set text-mode cursor shape.
+Set text-mode cursor shape.
 
 input:
 * CH = cursor start line (bits 0-4) and options (bits 5-7).
@@ -78,7 +78,7 @@ cursor is not visible.
 ```
 
 ### INT 10h / AH = 2 
-set cursor position.
+Set cursor position.
 
 input:
 * DH = row.
@@ -95,7 +95,7 @@ int 10h
 ```
 
 ### INT 10h / AH = 03h 
-get cursor position and size.
+Get cursor position and size.
 
 input:
 * BH = page number.
@@ -107,7 +107,7 @@ return:
 * CL = cursor bottom line.
 
 ### INT 10h / AH = 05h 
-select active video page.
+Select active video page.
 
 input:
 * AL = new page number (0..7).
@@ -126,7 +126,7 @@ input:
 * DH, DL = row, column of window's lower right corner.
 
 ### INT 10h / AH = 08h 
-read character and attribute at cursor position.
+Read character and attribute at cursor position.
 
 input:
 * BH = page number.
@@ -136,7 +136,7 @@ return:
 * AL = character.
 
 ### INT 10h / AH = 09h 
-write character and attribute at cursor position.
+Write character and attribute at cursor position.
 
 input:
 * AL = character to display.
@@ -145,7 +145,7 @@ input:
 * CX = number of times to write character.
 
 ### INT 10h / AH = 0Ah 
-write character only at cursor position.
+Write character only at cursor position.
 
 input:
 * AL = character to display.
@@ -153,7 +153,7 @@ input:
 * CX = number of times to write character.
 
 ### INT 10h / AH = 0Ch 
-change color for a single pixel.
+Change color for a single pixel.
 
 input:
 * AL = pixel color
@@ -173,7 +173,7 @@ int 10h ; set pixel.
 ```
 
 ### INT 10h / AH = 0Dh 
-get color of a single pixel.
+Get color of a single pixel.
 
 input:
 * CX = column.
@@ -183,7 +183,7 @@ output:
 * AL = pixel color
 
 ### INT 10h / AH = 0Eh 
-teletype output.
+Teletype output.
 
 input:
 * AL = character to write.
@@ -202,7 +202,7 @@ int 10h
 ```
 
 ### INT 10h / AH = 13h 
-write string.
+Write string.
 
 input:
 * AL = write mode:
@@ -233,7 +233,7 @@ msg1end:
 ```
 
 ### INT 10h / AX = 1003h 
-toggle intensity/blinking.
+Toggle intensity/blinking.
 
 input:
 * BL = write mode:
@@ -251,10 +251,10 @@ int 10h
 ---
 
 ### Bit Color Table:
-character attribute is 8 bit value, low 4 bits set fore color, high 4 bits
+Character attribute is 8 bit value, low 4 bits set fore color, high 4 bits
 set background color.
 
-note: the emulator and windows command line prompt do not support background
+Note: the emulator and windows command line prompt do not support background
 blinking,
 however to make colors look the same in dos and in full screen mode it is
 required to turn off the background blinking.
@@ -278,7 +278,7 @@ D   | 1101 | light magenta
 E   | 1110 | yellow
 F   | 1111 | white
 
-note:
+Note:
 ```nasm
 ; use this code for compatibility with dos/cmd prompt full screen mode:
 mov ax, 1003h
@@ -287,7 +287,7 @@ int 10h
 ```
 
 ### INT 11h 
-get BIOS equipment list.
+Get BIOS equipment list.
 
 return:
 * AX = BIOS equipment list word, actually this call returns the contents of
@@ -321,7 +321,7 @@ bit(s)  Description
 ```
 
 ### INT 12h 
-get memory size.
+Get memory size.
 
 return:
 * AX = kilobytes of contiguous memory starting at absolute address 00000h, this
@@ -334,13 +334,13 @@ Floppy drives are emulated using FLOPPY_0(..3) files.
 --- 
 
 ### INT 13h / AH = 00h 
-reset disk system.
+Reset disk system.
 
 ### INT 13h / AH = 02h 
-read disk sectors into memory.
+Read disk sectors into memory.
 
 ### INT 13h / AH = 03h 
-write disk sectors.
+Write disk sectors.
 
 input:
 * AL = number of sectors to read/write (must be nonzero)
@@ -370,13 +370,13 @@ return:
 
 Note:
 
-the resolution of the wait period is 977 microseconds on many systems 
+The resolution of the wait period is 977 microseconds on many systems 
 (1 million microseconds - 1 second).
 
 Windows XP does not support this interrupt (always sets CF=1).
 
 ### INT 16h / AH = 00h 
-get keystroke from keyboard (no echo).
+Get keystroke from keyboard (no echo).
 
 return:
 * AH = BIOS scan code.
@@ -385,7 +385,7 @@ return:
 (if a keystroke is present, it is removed from the keyboard buffer).
 
 ### INT 16h / AH = 01h 
-check for keystroke in the keyboard buffer.
+Check for keystroke in the keyboard buffer.
 
 return:
 * ZF = 1 if keystroke is not available.
@@ -393,7 +393,7 @@ return:
 * AH = BIOS scan code.
 * AL = ASCII character.
 
-(if a keystroke is present, it is not removed from the keyboard buffer).
+(If a keystroke is present, it is not removed from the keyboard buffer).
 
 ### INT 19h 
 system reboot.
@@ -403,21 +403,21 @@ Usually, the BIOS will try to read sector 1, head 0, track 0 from drive A: to
 select from the menu: 'virtual drive' -> 'boot from floppy'
 
 ### INT 1Ah / AH = 00h 
-get system time.
+Get system time.
 
 return:
 * CX:DX = number of clock ticks since midnight.
 * AL = midnight counter, advanced each time midnight passes.
 
-notes:
+Notes:
 
-there are approximately *18.20648* clock ticks per second,
+There are approximately *18.20648* clock ticks per second,
 and *1800B0h* per 24 hours.
 
 AL is not set by the emulator.
 
 ### INT 20h 
-exit to operating system.
+Exit to operating system.
 
 
 ## Emulated MS-DOS interrupts - INT 21h
@@ -441,9 +441,9 @@ example of a valid file name: myfile.txt (file name = 6 chars, extension - 3
 chars). extension is written after the dot, no other dots are allowed.
 
 ### INT 21h / AH=1 
-read character from standard input, with echo, result is stored in AL.
+Read character from standard input, with echo, result is stored in AL.
 
-if there is no character in the keyboard buffer, the function waits until any
+If there is no character in the keyboard buffer, the function waits until any
 key is pressed.
 
 Example:
@@ -453,7 +453,7 @@ int 21h
 ```
 
 ### INT 21h / AH=2 
-write character to standard output.
+Write character to standard output.
 
 entry: DL = character to write, after execution AL = DL.
 
@@ -465,7 +465,7 @@ int 21h
 ```
 
 ### INT 21h / AH=5 
-output character to printer.
+Output character to printer.
 
 entry: DL = character to print, after execution AL = DL.
 
@@ -477,7 +477,7 @@ int 21h
 ```
 
 ### INT 21h / AH=6 
-direct console input or output.
+Direct console input or output.
 
 * parameters for output: DL = 0..254 (ascii code)
 * parameters for input: DL = 255
@@ -499,9 +499,9 @@ int 21h ; get character from keyboard buffer (if any) or set ZF=1.
 
 
 ### INT 21h / AH=7 
-character input without echo to AL.
+Character input without echo to AL.
 
-if there is no character in the keyboard buffer, the function waits until any
+If there is no character in the keyboard buffer, the function waits until any
 key is pressed.
 
 Example:
@@ -511,7 +511,7 @@ int 21h
 ```
 
 ### INT 21h / AH=9 
-output of a string at DS:DX. String must be terminated by '$'.
+Output of a string at DS:DX. String must be terminated by '$'.
 
 Example:
 ```nasm
@@ -524,12 +524,12 @@ msg db "hello world $"
 ```
 
 ### INT 21h / AH=0Ah 
-input of a string to DS:DX
+Input of a string to DS:DX
 
-fist byte is buffer size, 
+first byte is buffer size, 
 second byte is number of chars actually read. 
 
-this function does not add '$' in the end of string. 
+This function does not add '$' in the end of string. 
 to print using INT 21h / AH=9 you must set dollar character 
 at the end of it and start printing from address DS:DX + 2.
 
@@ -551,17 +551,17 @@ int 21h
 ret
 ```
 
-the function does not allow to enter more characters than the specified
+The function does not allow to enter more characters than the specified
 buffer size.
 
 ### INT 21h / AH=0Bh 
-get input status;
+Get input status;
 
 returns: AL = 00h if no character available, AL = 0FFh if character is
 available.
 
 ### INT 21h / AH=0Ch 
-flush keyboard buffer and read standard input.
+Flush keyboard buffer and read standard input.
 
 entry: AL = number of input function to execute after flushing buffer (can be
 01h,06h,07h,08h, or 0Ah - for other values the buffer is flushed but no input
@@ -569,7 +569,7 @@ is attempted);
 other registers as appropriate for the selected input function.
 
 ### INT 21h / AH= 0Eh 
-select default drive.
+Select default drive.
 
 Entry: DL = new default drive (0=A:, 1=B:, etc)
 
@@ -578,35 +578,35 @@ Return: AL = number of potentially valid drive letters
 Notes: the return value is the highest drive present.
 
 ### INT 21h / AH= 19h 
-get current default drive.
+Get current default drive.
 
 Return: AL = drive (0=A:, 1=B:, etc)
 
 ### INT 21h / AH=25h 
-set interrupt vector;
+Set interrupt vector;
 
 input: AL = interrupt number. DS:DX -> new interrupt handler.
 
 ### INT 21h / AH=2Ah 
-get system date;
+Get system date;
 
 return: CX = year (1980-2099). DH = month. DL = day. AL = day of week
 (00h=Sunday)
 
 ### INT 21h / AH=2Ch 
-get system time;
+Get system time;
 
 return: CH = hour. CL = minute. DH = second. DL = 1/100 seconds.
 
 
 ### INT 21h / AH=35h 
-get interrupt vector;
+Get interrupt vector;
 
 entry: AL = interrupt number;
 return: ES:BX -> current interrupt handler.
 
 ### INT 21h / AH= 39h 
-make directory.
+Make directory.
 
 entry: DS:DX -> ASCIZ pathname; zero terminated string, for example:
 ```nasm
@@ -619,14 +619,14 @@ filepath DB "C:\mydir", 0 ; path to be created.
 end
 ```
 
-the above code creates c:\emu8086\vdrive\C\mydir directory if run by the
+The above code creates c:\emu8086\vdrive\C\mydir directory if run by the
 emulator.
 
 Return: CF clear if successful AX destroyed. CF set on error AX = error code.
 Note: all directories in the given path must exist except the last one.
 
 ### INT 21h / AH= 3Ah 
-remove directory.
+Remove directory.
 
 Entry: DS:DX -> ASCIZ pathname of directory to be removed.
 
@@ -635,7 +635,7 @@ CF is clear if successful, AX destroyed CF is set on error AX = error code.
 Notes: directory must be empty (there should be no files inside of it).
 
 ### INT 21h / AH= 3Bh 
-set current directory.
+Set current directory.
 
 Entry: DS:DX -> ASCIZ pathname to become current directory (max 64 bytes).
 
@@ -647,7 +647,7 @@ Notes: even if new directory name includes a drive letter, the default drive
 is not changed, only the current directory on that drive.
 
 ### INT 21h / AH= 3Ch 
-create or truncate file.
+Create or truncate file.
 
 entry:
 CX = file attributes:
@@ -667,7 +667,7 @@ returns:
 * CF clear if successful, AX = file handle.
 * CF set on error AX = error code.
 
-note: if specified file exists it is deleted without a warning.
+Note: if specified file exists it is deleted without a warning.
 
 Example:
 ```nasm
@@ -689,7 +689,7 @@ ret
 ```
 
 ### INT 21h / AH= 3Dh 
-open existing file.
+Open existing file.
 
 Entry:
 * AL = access and sharing modes:
@@ -706,9 +706,9 @@ Return:
 * CF clear if successful, AX = file handle.
 * CF set on error AX = error code.
 
-note 1: file pointer is set to start of file.
+Note 1: file pointer is set to start of file.
 
-note 2: file must exist.
+Note 2: file must exist.
 
 Example:
 ```nasm
@@ -729,7 +729,7 @@ ret
 ```
 
 ### INT 21h / AH= 3Eh 
-close file.
+Close file.
 
 Entry: BX = file handle
 
@@ -738,7 +738,7 @@ Return:
 * CF set on error, AX = error code (06h).
 
 ### INT 21h / AH= 3Fh 
-read from file.
+Read from file.
 Entry:
 * BX = file handle.
 * CX = number of bytes to read.
@@ -754,7 +754,7 @@ is updated after a successful read the returned AX may be smaller
 than the request in CX if a partial read occurred.
 
 ### INT 21h / AH= 40h 
-write to file.
+Write to file.
 
 entry:
 * BX = file handle.
@@ -765,13 +765,13 @@ return:
 * CF clear if successful; AX = number of bytes actually written.
 * CF set on error; AX = error code.
 
-note: if CX is zero, no data is written, and the file is truncated or
+Note: if CX is zero, no data is written, and the file is truncated or
 extended to the current position data is written beginning at the 
 current file position, and the file position is updated
 after a successful write the usual cause for AX < CX on return is a full disk.
 
 ### INT 21h / AH= 41h 
-delete file (unlink).
+Delete file (unlink).
 
 Entry:
 DS:DX -> ASCIZ filename (no wildcards).
@@ -787,6 +787,7 @@ which is currently open may lead to filesystem corruption.
 
 ### INT 21h / AH= 42h 
 SEEK - set current file position.
+
 Entry:
 * AL = origin of move: 0 - start of file. 1 - current file position. 2 - end of
 file.
@@ -849,7 +850,7 @@ buffer db 4 dup(' ')
 ```
 
 ### INT 21h / AH= 47h 
-get current directory.
+Get current directory.
 
 Entry:
 * DL = drive number (00h = default, 01h = A:, etc)
@@ -863,10 +864,10 @@ Notes:
 the returned path does not include a drive and the initial backslash.
 
 ### INT 21h / AH=4Ch 
-return control to the operating system (stop program).
+Return control to the operating system (stop program).
 
 ### INT 21h / AH= 56h 
-rename file / move file.
+Rename file / move file.
 
 Entry:
 * DS:DX -> ASCIZ filename of existing file.
@@ -879,10 +880,10 @@ Return:
 Note: allows move between directories on same logical drive only; open files
 should not be renamed!
 
-## mouse driver interrupts -- INT 33h
+## Mouse Driver Interrupts -- INT 33h
 
 ### INT 33h / AX=0000
-mouse ininialization. any previous mouse pointer is hidden.
+Mouse ininialization. any previous mouse pointer is hidden.
 
 returns:
 * if successful: AX=0FFFFh and BX=number of mouse buttons.
@@ -895,7 +896,7 @@ int 33h
 ```
 
 ### INT 33h / AX=0001 
-show mouse pointer.
+Show mouse pointer.
 
 Example:
 ```nasm
@@ -904,7 +905,7 @@ int 33h
 ```
 
 ### INT 33h / AX=0002 
-hide visible mouse pointer.
+Hide visible mouse pointer.
 
 Example:
 ```nasm
@@ -913,9 +914,9 @@ int 33h
 ```
 
 ### INT 33h / AX=0003 
-get mouse position and status of its buttons.
+Get mouse position and status of its buttons.
 
-returns
+returns:
 * if left button is down: BX=1
 * if right button is down: BX=2
 * if both buttons are down: BX=3
