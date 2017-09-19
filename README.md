@@ -2,6 +2,7 @@
 
 ## Quick reference:
 
+      |      |      |      |        |       |      | 
 ---   | ---  | ---  | ---  | ---    | ---   | ---  | ---
 AAA   | DAA  | HLT  | JNL  | LODSB  | POP   | ROR  | XCHG
 AAD   | DAS  | IMUL | JNLE | LODSW  | POPA  | SAHF | XLATB
