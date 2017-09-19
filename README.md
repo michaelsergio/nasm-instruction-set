@@ -741,7 +741,7 @@ RET
 
 ```
 C Z S O P A I
-unchanged 0
+unchanged   0
 ```
 
 ### INTO 
