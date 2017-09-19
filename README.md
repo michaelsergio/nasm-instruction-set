@@ -567,9 +567,12 @@ MOV AL, 255 ; AL = 0FFh (255 or -1)
 DEC AL ; AL = 0FEh (254 or -2)
 RET
 ```
+
+```
 CF - unchanged!
 Z S O P A
 r r r r r
+```
 
 ### DIV
 * REG
@@ -708,9 +711,12 @@ MOV AL, 4
 INC AL ; AL = 5
 RET
 ```
+
+```
 CF - unchanged!
 Z S O P A
 r r r r r
+```
 
 ### INT 
 * immediate byte
