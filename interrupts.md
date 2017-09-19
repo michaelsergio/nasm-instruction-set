@@ -38,7 +38,7 @@ these video modes are supported:
 * 03h - text mode. 80x25. 16 colors. 8 pages.
 * 13h - graphical mode. 40x25. 256 colors. 320x200 pixels. 1 page.
 
-example:
+Example:
 ```nasm
 mov al, 13h
 mov ah, 0
@@ -85,7 +85,7 @@ input:
 * DL = column.
 * BH = page number (0..7).
 
-example:
+Example:
 ```nasm
 mov dh, 10
 mov dl, 20
@@ -160,7 +160,7 @@ input:
 * CX = column.
 * DX = row.
 
-example:
+Example:
 ```nasm
 mov al, 13h
 mov ah, 0
@@ -192,7 +192,7 @@ scrolling the screen as necessary.
 
 the printing is always done to current active page.
 
-example:
+Example:
 ```nasm
 mov al, 'a'
 mov ah, 0eh
@@ -214,7 +214,7 @@ input:
 * DL,DH = column, row at which to start writing.
 * ES:BP points to string to be printed.
 
-example:
+Example:
 ```nasm
 mov al, 1
 mov bh, 0
@@ -241,7 +241,7 @@ input:
   * 1: enable blinking (not supported by the emulator and windows command prompt)
 * BH = 0 (to avoid problems on some adapters).
 
-example:
+Example:
 ```nasm
 mov ax, 1003h
 mov bx, 0
@@ -446,7 +446,7 @@ read character from standard input, with echo, result is stored in AL.
 if there is no character in the keyboard buffer, the function waits until any
 key is pressed.
 
-example:
+Example:
 ```nasm
 mov ah, 1
 int 21h
@@ -457,7 +457,7 @@ write character to standard output.
 
 entry: DL = character to write, after execution AL = DL.
 
-example:
+Example:
 ```nasm
 mov ah, 2
 mov dl, 'a'
@@ -469,7 +469,7 @@ output character to printer.
 
 entry: DL = character to print, after execution AL = DL.
 
-example:
+Example:
 ```nasm
 mov ah, 5
 mov dl, 'a'
@@ -487,7 +487,7 @@ direct console input or output.
 character available.
 * AL = character read; buffer is cleared.
 
-example:
+Example:
 ```nasm
 mov ah, 6
 mov dl, 'a'
@@ -504,7 +504,7 @@ character input without echo to AL.
 if there is no character in the keyboard buffer, the function waits until any
 key is pressed.
 
-example:
+Example:
 ```nasm
 mov ah, 7
 int 21h
@@ -513,7 +513,7 @@ int 21h
 ### INT 21h / AH=9 
 output of a string at DS:DX. String must be terminated by '$'.
 
-example:
+Example:
 ```nasm
 org 100h
 mov dx, offset msg
@@ -533,7 +533,7 @@ this function does not add '$' in the end of string.
 to print using INT 21h / AH=9 you must set dollar character 
 at the end of it and start printing from address DS:DX + 2.
 
-example:
+Example:
 ```nasm
 org 100h
 mov dx, offset buffer
@@ -669,7 +669,7 @@ returns:
 
 note: if specified file exists it is deleted without a warning.
 
-example:
+Example:
 ```nasm
 org 100h
 mov ah, 3ch
@@ -710,7 +710,7 @@ note 1: file pointer is set to start of file.
 
 note 2: file must exist.
 
-example:
+Example:
 ```nasm
 org 100h
 mov al, 2
@@ -807,7 +807,7 @@ the new position is beyond the current end of file, the file will be extended
 by the next write
 (see AH=40h).
 
-example:
+Example:
 ```nasm
 org 100h
 mov ah, 3ch
@@ -888,7 +888,7 @@ returns:
 * if successful: AX=0FFFFh and BX=number of mouse buttons.
 * if failed: AX=0
 
-example:
+Example:
 ```nasm
 mov ax, 0
 int 33h
@@ -897,7 +897,7 @@ int 33h
 ### INT 33h / AX=0001 
 show mouse pointer.
 
-example:
+Example:
 ```nasm
 mov ax, 1
 int 33h
@@ -906,7 +906,7 @@ int 33h
 ### INT 33h / AX=0002 
 hide visible mouse pointer.
 
-example:
+Example:
 ```nasm
 mov ax, 2
 int 33h
@@ -922,7 +922,7 @@ returns
 * CX = x
 * DX = y
 
-example:
+Example:
 ```nasm
 mov ax, 3
 int 33h
