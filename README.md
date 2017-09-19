@@ -1710,8 +1710,11 @@ Load AH from 8 low bits of Flags register.
 Algorithm:
 
 AH = flags register
-AH bit: 7 6 5 4 3 2 1 0
-`[SF] [ZF] [0] [AF] [0] [PF] [1] [CF]`
+
+```
+AH bit:  7    6   5    4   3    2   1    0
+       [SF] [ZF] [0] [AF] [0] [PF] [1] [CF]
+```
 bits 1, 3, 5 are reserved.
 
 ```
@@ -2702,8 +2705,11 @@ Store AH register into low 8 bits of Flags register.
 Algorithm:
 
 flags register = AH
-AH bit: 7 6 5 4 3 2 1 0
-[SF] [ZF] [0] [AF] [0] [PF] [1] [CF]
+
+```
+AH bit:  7    6   5    4   3    2   1    0
+       [SF] [ZF] [0] [AF] [0] [PF] [1] [CF]
+```
 bits 1, 3, 5 are reserved.
 
 ```
