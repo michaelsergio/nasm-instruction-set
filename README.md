@@ -75,10 +75,10 @@ RET
 ---
 
 These marks are used to show the state of the flags:
-1 - instruction sets this flag to 1.
-0 - instruction sets this flag to 0.
-r - flag value depends on result of the instruction.
-? - flag value is undefined (maybe 1 or 0).
+* 1 - instruction sets this flag to 1.
+* 0 - instruction sets this flag to 0.
+* r - flag value depends on result of the instruction.
+* ? - flag value is undefined (maybe 1 or 0).
 
 ---
 
