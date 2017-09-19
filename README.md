@@ -27,7 +27,7 @@ CWD   | JNBE | JNGE | LES  | OUT    | ROL   | TEST
 
 *SREG*: DS, ES, SS, and only as second operand: CS.
 
-*memory*: [BX], [BX+SI+7], variable, etc...(see Memory Access).
+*memory*: [BX], [BX+SI+7], variable, etc...
 
 *immediate*: 5, -24, 3Fh, 10001101b, etc...
 
@@ -84,8 +84,7 @@ These marks are used to show the state of the flags:
 
 Some instructions generate exactly the same machine code, so disassembler
 may have a problem decoding to your original code. This is especially important
-for Conditional Jump instructions (see "Program Flow Control" in Tutorials for
-more information).
+for Conditional Jump instructions.
 
 ---
 
